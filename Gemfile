@@ -6,6 +6,7 @@ gemspec
 gem 'slop', '~> 3.6' # For byebug
 
 group :development, :test do
+  gem 'rb-readline'
   gem 'rubocop', '~> 0.47.0', require: false
   gem 'rubocop-rspec', '~> 1.13.0', require: false
   gem 'pry' unless ENV['CI']

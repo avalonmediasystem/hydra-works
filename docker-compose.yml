@@ -1,0 +1,27 @@
+version: '2'
+
+volumes:
+  fedora:
+  solr:
+
+services:
+  fedora:
+    image: avalonmediasystem/fedora:4.7.5
+    volumes:
+      - fedora:/var/lib/jetty/data
+    environment:
+      - JAVA_OPTIONS=${JAVA_OPTIONS} -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json -Dfcrepo.home=/var/lib/jetty/data
+    ports:
+      - "8986:8080"
+  solr:
+    image: solr:7.2.1-alpine
+    ports:
+      - "8985:8983"
+    volumes:
+      - solr:/opt/solr/server/solr/mycores
+      - ./solr/config:/opt/solr/hydra_conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - hydra-test
+      - /opt/solr/hydra_conf

@@ -1,3 +1,4 @@
+require 'readline'
 ENV['environment'] ||= 'test'
 require 'simplecov'
 require 'coveralls'
